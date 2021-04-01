@@ -1,2 +1,1 @@
-# lab-apply-theory
-Some apply algorithm code
+# Apply Theory Code
