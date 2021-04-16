@@ -117,9 +117,9 @@ def errorr(qr,qc):
 
 
 def controlkinematic(qe,vr,wr):
-	k1 = 10 # need tuning
-	k2 = 5 # need tuning
-	k3 = 4 # need tuning
+	k1 = 10 # need tuning defualt 10
+	k2 = 5 # need tuning defualt 5
+	k3 = 4 # need tuning defualt 4
 
 	vc = vr*math.cos(qe[2,0])+k1*qe[0,0]
 	wc = wr+k2*vr*qe[1,0]*k3*math.sin(qe[2,0])
@@ -164,7 +164,7 @@ while True:
 	qr       = np.array([[xRef],[yRef],[theta_ref]])
 	qe       = errorr(qr,qc)
 	vc,wc    = controlkinematic(qe,vr,wr)
-
+	print(f'{vc},{wc}')
 
 	# Store path
 	xrref = np.append(xrref, np.array([[xRef]]), axis=0)
