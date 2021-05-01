@@ -9,7 +9,7 @@ import random
 # Ref pose
 def ref_cicle(t):
 	freq   = 2*math.pi/30
-	radius = 5
+	radius = 3
 
 	x     = radius*math.cos(freq*t)
 	y     = radius*math.sin(freq*t)
