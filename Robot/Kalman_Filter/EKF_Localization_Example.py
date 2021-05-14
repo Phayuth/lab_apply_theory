@@ -15,18 +15,17 @@ Q = np.diag([
 	0.1,  # variance of location on x-axis
 	0.1,  # variance of location on y-axis
 	np.deg2rad(1.0),  # variance of yaw angle
-	1.0  # variance of velocity
 ]) ** 2  # predict state covariance
 R = np.diag([1.0, 1.0]) ** 2  # Observation x,y position covariance
 
 #  Simulation parameter
 INPUT_NOISE = np.diag([1.0, np.deg2rad(30.0)]) ** 2
-GPS_NOISE = np.diag([0.5, 0.5]) ** 2
+GPS_NOISE = np.diag([0.2, 0.2]) ** 2 #GPS_NOISE = np.diag([0.5, 0.5]) ** 2
 
 DT = 0.1  # time tick [s]
 SIM_TIME = 50.0  # simulation time [s]
 
-show_animation = True
+show_animation = True #True
 
 
 def calc_input():
@@ -51,15 +50,13 @@ def observation(xTrue, xd, u):
 
 
 def motion_model(x, u):
-	F = np.array([[1.0, 0, 0, 0],
-				  [0, 1.0, 0, 0],
-				  [0, 0, 1.0, 0],
-				  [0, 0, 0, 0]])
+	F = np.array([[1.0, 0, 0],
+				  [0, 1.0, 0],
+				  [0, 0, 1.0]])
 
 	B = np.array([[DT * math.cos(x[2, 0]), 0],
 				  [DT * math.sin(x[2, 0]), 0],
-				  [0.0, DT],
-				  [1.0, 0.0]])
+				  [0.0, DT]])
 
 	x = F @ x + B @ u
 
@@ -68,9 +65,8 @@ def motion_model(x, u):
 
 def observation_model(x):
 	H = np.array([
-		[1, 0, 0, 0],
-		[0, 1, 0, 0]
-	])
+		[1, 0, 0],
+		[0, 1, 0]])
 
 	z = H @ x
 
@@ -78,26 +74,12 @@ def observation_model(x):
 
 
 def jacob_f(x, u):
-	"""
-	Jacobian of Motion Model
-	motion model
-	x_{t+1} = x_t+v*dt*cos(yaw)
-	y_{t+1} = y_t+v*dt*sin(yaw)
-	yaw_{t+1} = yaw_t+omega*dt
-	v_{t+1} = v{t}
-	so
-	dx/dyaw = -v*dt*sin(yaw)
-	dx/dv = dt*cos(yaw)
-	dy/dyaw = v*dt*cos(yaw)
-	dy/dv = dt*sin(yaw)
-	"""
 	yaw = x[2, 0]
 	v = u[0, 0]
 	jF = np.array([
-		[1.0, 0.0, -DT * v * math.sin(yaw), DT * math.cos(yaw)],
-		[0.0, 1.0, DT * v * math.cos(yaw), DT * math.sin(yaw)],
-		[0.0, 0.0, 1.0, 0.0],
-		[0.0, 0.0, 0.0, 1.0]])
+		[1.0, 0.0, -DT * v * math.sin(yaw)],
+		[0.0, 1.0, DT * v * math.cos(yaw)],
+		[0.0, 0.0, 1.0]])
 
 	return jF
 
@@ -105,9 +87,8 @@ def jacob_f(x, u):
 def jacob_h():
 	# Jacobian of Observation Model
 	jH = np.array([
-		[1, 0, 0, 0],
-		[0, 1, 0, 0]
-	])
+		[1, 0, 0],
+		[0, 1, 0]])
 
 	return jH
 
@@ -159,11 +140,11 @@ def main():
 	time = 0.0
 
 	# State Vector [x y yaw v]'
-	xEst = np.zeros((4, 1))
-	xTrue = np.zeros((4, 1))
-	PEst = np.eye(4)
+	xEst = np.zeros((3, 1))
+	xTrue = np.zeros((3, 1))
+	PEst = np.eye(3)
 
-	xDR = np.zeros((4, 1))  # Dead reckoning
+	xDR = np.zeros((3, 1))  # Dead reckoning
 
 	# history
 	hxEst = xEst
@@ -178,7 +159,7 @@ def main():
 		xTrue, z, xDR, ud = observation(xTrue, xDR, u)
 
 		xEst, PEst = ekf_estimation(xEst, PEst, z, ud)
-
+#+=======================================================================================
 		# store data history
 		hxEst = np.hstack((hxEst, xEst))
 		hxDR = np.hstack((hxDR, xDR))
