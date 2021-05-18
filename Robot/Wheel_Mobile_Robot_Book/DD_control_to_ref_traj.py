@@ -39,6 +39,7 @@ t = 0
 k = 0
 q = np.array([[1.1],[0.8],[0]])
 
+
 def rreeff(t):
 	freq   = 2*math.pi/30
 
