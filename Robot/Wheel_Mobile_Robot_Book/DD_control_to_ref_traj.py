@@ -67,10 +67,10 @@ while True:
 	Kphi  = Kx
 	Ky    = g*vRef
 	# Gains can also be constant e.g.: Kx = Kphi = 3; Ky = 30
-
+	print(f"thetaref = {qRef[2,0]} ,    thetacur = {q[2,0]}")
 	# Control: feedforward and feedback
-	v = vRef*np.cos(e[2,0]) + Kx*e[0,0]
-	w = wRef + Ky*e[1,0] + Kphi*e[2,0]
+	v = vRef*np.cos(ePhi) + Kx*eX
+	w = wRef + Ky*eY + Kphi*ePhi
 
 	xpath.append(q[0,0])
 	ypath.append(q[1,0])
@@ -79,7 +79,6 @@ while True:
 
 	dq = np.array([[v*np.cos(q[2,0])],[v*np.sin(q[2,0])],[w]])
 	q = q + dq * 0.033
-	q[2,0] = angnorm(q[2,0])
 
 	xpathary = np.transpose(np.array([xpath]))
 	ypathary = np.transpose(np.array([ypath]))
