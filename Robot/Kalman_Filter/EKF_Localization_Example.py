@@ -14,7 +14,7 @@ from scipy.spatial.transform import Rotation as Rot
 Q = np.diag([
 	0.1,  # variance of location on x-axis
 	0.1,  # variance of location on y-axis
-	np.deg2rad(1.0),  # variance of yaw angle
+	np.deg2rad(1.0)  # variance of yaw angle
 ]) ** 2  # predict state covariance
 R = np.diag([1.0, 1.0]) ** 2  # Observation x,y position covariance
 
