@@ -25,11 +25,6 @@ def reff(t):
 	return xRef,yRef
 
 def makeFig(): #Create a function that makes our desired plot
-	#plt.ylim(-2.5,10)
-	#plt.xlim(-7.5,10)
-	#plt.grid(True)
-	#refx = Refpose[:,0]
-	#refy = Refpose[:,1]
 	plt.plot(xrrefary,yrrefary)
 	plt.plot(xpathary,ypathary)
 
@@ -56,7 +51,7 @@ while True:
 	# Error with respect to the (moving) reference
 	e = qRef - q;		  # Error on x, y and orientation
 	e[2,0] = angnorm(e[2,0]) # Mapped to the [-pi, pi] interval
-	print(e[2,0])
+	print(f"phiref = {phiRef} ,    phicurr = {q[2,0]}")
 	# Control
 	alpha = e[2,0]*Kphi		  # Orientation control (basic)
 	v = np.sqrt(e[0,0]**2+e[1,0]**2)*Kv # Forward-motion control (basic)
@@ -94,3 +89,4 @@ while True:
 	#q[2,0] = angnorm(q[2,0])
 	#print(q[2,0])
 	t+=0.03
+	time.sleep(0.01)
