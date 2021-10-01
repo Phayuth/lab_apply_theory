@@ -28,7 +28,6 @@ i = 0
 
 
 while True:
-#for k in range(10000):
 	try:
 		#Reference segment determination
 		dx = np.array(Refpose[i+1]-Refpose[i])[0] # correct take x each line segment to find dx

@@ -27,6 +27,7 @@ def reff(t):
 def makeFig(): #Create a function that makes our desired plot
 	plt.plot(xrrefary,yrrefary)
 	plt.plot(xpathary,ypathary)
+	plt.legend(('reference_path','robot_path'), loc='upper left', shadow=True)
 
 xpath = []
 ypath = []
@@ -86,7 +87,5 @@ while True:
 
 	drawnow(makeFig)
 	plt.pause(.000001)
-	#q[2,0] = angnorm(q[2,0])
-	#print(q[2,0])
 	t+=0.03
 	time.sleep(0.01)

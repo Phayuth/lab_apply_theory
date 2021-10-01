@@ -14,7 +14,7 @@ Q = np.diag([0.1,0.1,np.deg2rad(1.0),1.0]) ** 2
 R = np.diag([1.0, 1.0]) ** 2
 
 def input():
-	v = -1 #m/s
+	v = 1 #m/s
 	w = 0.2 #rad/s
 
 	u = np.array([[v],[w]])

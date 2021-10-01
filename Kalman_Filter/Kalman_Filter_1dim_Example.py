@@ -18,9 +18,8 @@ def makeFig(): # For drawnow function
 
 	ax2 = plt.subplot(122)
 	ax2.plot(t_store,p_store)
-
-	# ax3 = plt.subplot(133)
-	# ax3.plot(t_store,m_store)
+	ax2.set_xlabel('time')
+	ax2.set_ylabel('P_value')
 
 def sign_rand():
 	sign = random.random()
