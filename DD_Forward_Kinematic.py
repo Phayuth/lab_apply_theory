@@ -40,9 +40,9 @@ def FKE(velocity,angular_v,theta):
 	m = np.array([[math.cos(theta),0],[math.sin(theta),0],[0,1]])
 	n = np.array([[velocity],[angular_v]])
 	o = m.dot(n) # multiply matrix in numpy
-	x_dot     = o[0]#math.cos(theta)*velocity    o[0]
-	y_dot     = o[1]#math.sin(theta)*velocity    o[1]
-	theta_dot = o[2]#angular_v                   o[2]
+	x_dot     = o[0]
+	y_dot     = o[1]
+	theta_dot = o[2]
 	return x_dot,y_dot,theta_dot
 #----------------------------------------------------------------
 
