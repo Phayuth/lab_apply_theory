@@ -1,6 +1,6 @@
 import numpy as np
 
-def encoder_theta_2_omega(GR,PPR,count,theta_p,omega_p):
+def encoder_theta_2_omega(GR,PPR,count,theta_p,omega_p,a,Ts):
 	"""
 	Transfer function for determining the wheel velocity from encoder T(s)=s/(as+1)
 	GR = Gearbox
@@ -15,7 +15,7 @@ def encoder_theta_2_omega(GR,PPR,count,theta_p,omega_p):
 	"""
 	theta = (2*3.14*count)/(GR*PPR)
 	omega = (1-Ts/a)*omega_p  + (1/a)*(theta-theta_p)
-	return omega
+	return omega,theta
 
 def DD_FKI(Wr,Wl,r,L):
 	"""
