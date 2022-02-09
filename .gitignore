@@ -131,6 +131,9 @@ dmypy.json
 
 
 
+# Windows MATLAB SIMULINK gitignore start here
+
+
 # Windows default autosave extension
 *.asv
 
@@ -162,3 +165,13 @@ codegen/
 
 # Octave session info
 octave-workspace
+
+# Simulink Code Gen File
+*.bin
+*.elf
+*.c
+*.mexw64
+*.tlc
+*.mat
+*_ert_rtw/
+rtwmakecfg.m
