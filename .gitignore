@@ -175,3 +175,4 @@ octave-workspace
 *.mat
 *_ert_rtw/
 rtwmakecfg.m
+*.mp4
